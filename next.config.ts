@@ -3,8 +3,9 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
-  output: 'export',
+  // ❌ remove this
+  // output: 'export',
   trailingSlash: true,
 }
 
-module.exports = nextConfig
+module.exports = nextConfig;
