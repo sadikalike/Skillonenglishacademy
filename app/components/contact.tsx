@@ -108,7 +108,7 @@ export default function Contact() {
             <span className="w-2 h-2 bg-rose-500 rounded-full animate-pulse"></span>
             <span className="text-rose-600 text-sm font-medium">Get in Touch</span>
           </div>
-          <h1 className="text-4xl md:text-5xl font-bold mb-6">
+          <h1 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900">
             Let's <span className="bg-gradient-to-r from-rose-600 to-rose-500 bg-clip-text text-transparent">Connect</span>
           </h1>
           <p className="text-gray-600 text-lg">
@@ -144,7 +144,7 @@ export default function Contact() {
                   </motion.div>
                   <h3 className="text-xl font-bold text-gray-900 mb-3">{info.title}</h3>
                   {info.details.map((detail, i) => (
-                    <p key={i} className="text-gray-500 text-sm">{detail}</p>
+                    <p key={i} className="text-gray-600 text-sm">{detail}</p>
                   ))}
                 </motion.div>
               ))}
@@ -249,121 +249,91 @@ export default function Contact() {
           </motion.div>
         </div>
 
-        {/* Social Media & Map Section */}
-        <div className="grid md:grid-cols-2 gap-10">
+        {/* Social Media Section - Full Width (Map Removed) */}
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          variants={fadeInUp}
+          className="bg-white rounded-2xl p-8 shadow-xl border border-gray-100 max-w-2xl mx-auto"
+        >
+          <h3 className="text-xl font-bold text-gray-900 mb-6 text-center">
+            Connect on <span className="bg-gradient-to-r from-rose-600 to-rose-500 bg-clip-text text-transparent">Social Media</span>
+          </h3>
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
+            {socialLinks.map((social, index) => (
+              <motion.a
+                key={index}
+                href={social.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={{ scale: 1.05, y: -3 }}
+                className="flex flex-col items-center gap-2 px-4 py-3 bg-gray-50 rounded-xl hover:shadow-md transition-all duration-300 group text-center"
+              >
+                <div className={`w-10 h-10 bg-gradient-to-r ${social.color} rounded-full flex items-center justify-center text-white text-lg`}>
+                  {social.icon}
+                </div>
+                <span className="text-gray-700 text-xs font-medium group-hover:text-rose-600 transition">
+                  {social.name}
+                </span>
+                {social.number && (
+                  <span className="text-gray-400 text-[10px]">{social.number}</span>
+                )}
+              </motion.a>
+            ))}
+          </div>
           
-          {/* Social Media Links - Centered */}
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.2 }}
-            variants={fadeInUp}
-            className="bg-white rounded-2xl p-8 shadow-xl border border-gray-100"
-          >
-            <h3 className="text-xl font-bold text-gray-900 mb-6 text-center">
-              Connect on <span className="bg-gradient-to-r from-rose-600 to-rose-500 bg-clip-text text-transparent">Social Media</span>
-            </h3>
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
-              {socialLinks.map((social, index) => (
-                <motion.a
-                  key={index}
-                  href={social.link}
+          {/* WhatsApp CTA - Two Numbers */}
+          <div className="mt-6 space-y-3">
+            <div className="p-4 bg-gradient-to-r from-green-50 to-emerald-50 rounded-xl border border-green-100">
+              <div className="flex items-center gap-3">
+                <div className="w-12 h-12 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full flex items-center justify-center">
+                  <FaHeadset className="text-white text-xl" />
+                </div>
+                <div>
+                  <p className="text-gray-700 font-medium">Quick Support on WhatsApp</p>
+                  <p className="text-sm text-gray-500">Click to chat with our team</p>
+                </div>
+              </div>
+              <div className="flex gap-3 mt-3">
+                <motion.a 
+                  href="https://wa.me/917025191020"
                   target="_blank"
                   rel="noopener noreferrer"
-                  whileHover={{ scale: 1.05, y: -3 }}
-                  className="flex flex-col items-center gap-2 px-4 py-3 bg-gray-50 rounded-xl hover:shadow-md transition-all duration-300 group text-center"
+                  whileHover={{ scale: 1.05 }}
+                  className="flex-1 px-3 py-2 bg-gradient-to-r from-green-500 to-emerald-500 text-white rounded-lg text-sm font-medium hover:shadow-lg transition text-center"
                 >
-                  <div className={`w-10 h-10 bg-gradient-to-r ${social.color} rounded-full flex items-center justify-center text-white text-lg`}>
-                    {social.icon}
-                  </div>
-                  <span className="text-gray-700 text-xs font-medium group-hover:text-rose-600 transition">
-                    {social.name}
-                  </span>
-                  {social.number && (
-                    <span className="text-gray-400 text-[10px]">{social.number}</span>
-                  )}
+                  📱 70251 91020
                 </motion.a>
-              ))}
-            </div>
-            
-            {/* WhatsApp CTA - Two Numbers */}
-            <div className="mt-6 space-y-3">
-              <div className="p-4 bg-gradient-to-r from-green-50 to-emerald-50 rounded-xl border border-green-100">
-                <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full flex items-center justify-center">
-                    <FaHeadset className="text-white text-xl" />
-                  </div>
-                  <div>
-                    <p className="text-gray-700 font-medium">Quick Support on WhatsApp</p>
-                    <p className="text-sm text-gray-500">Click to chat with our team</p>
-                  </div>
-                </div>
-                <div className="flex gap-3 mt-3">
-                  <motion.a 
-                    href="https://wa.me/917025191020"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    whileHover={{ scale: 1.05 }}
-                    className="flex-1 px-3 py-2 bg-gradient-to-r from-green-500 to-emerald-500 text-white rounded-lg text-sm font-medium hover:shadow-lg transition text-center"
-                  >
-                    📱 70251 91020
-                  </motion.a>
-                  <motion.a 
-                    href="https://wa.me/917510436350"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    whileHover={{ scale: 1.05 }}
-                    className="flex-1 px-3 py-2 bg-gradient-to-r from-green-500 to-emerald-500 text-white rounded-lg text-sm font-medium hover:shadow-lg transition text-center"
-                  >
-                    📱 75104 36350
-                  </motion.a>
-                </div>
+                <motion.a 
+                  href="https://wa.me/917510436350"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  whileHover={{ scale: 1.05 }}
+                  className="flex-1 px-3 py-2 bg-gradient-to-r from-green-500 to-emerald-500 text-white rounded-lg text-sm font-medium hover:shadow-lg transition text-center"
+                >
+                  📱 75104 36350
+                </motion.a>
               </div>
             </div>
+          </div>
 
-            {/* Trust Badges */}
-            <div className="mt-6 flex items-center justify-center gap-4 text-xs text-gray-500">
-              <div className="flex items-center gap-1">
-                <FaShieldAlt className="text-rose-500" />
-                <span>100% Secure</span>
-              </div>
-              <div className="flex items-center gap-1">
-                <FaRocket className="text-rose-500" />
-                <span>Fast Response</span>
-              </div>
+          {/* Trust Badges */}
+          <div className="mt-6 flex items-center justify-center gap-6 text-xs text-gray-500">
+            <div className="flex items-center gap-2">
+              <FaShieldAlt className="text-rose-500 text-sm" />
+              <span>100% Secure</span>
             </div>
-          </motion.div>
-
-          {/* Map / Location */}
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.2 }}
-            variants={fadeInUp}
-            className="bg-white rounded-2xl p-8 shadow-xl border border-gray-100"
-          >
-            <h3 className="text-xl font-bold text-gray-900 mb-6 text-center">
-              Find <span className="bg-gradient-to-r from-rose-600 to-rose-500 bg-clip-text text-transparent">Us</span>
-            </h3>
-            <div className="bg-gray-100 rounded-xl overflow-hidden h-64 relative">
-              <div className="absolute inset-0 bg-gradient-to-br from-rose-500/10 to-transparent pointer-events-none"></div>
-              <iframe 
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3888.514887675688!2d77.5945630747778!3d12.971999687307676!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae1670c9b44e6d%3A0xf8dfc3e1417e2a0!2sBengaluru%2C%20Karnataka!5e0!3m2!1sen!2sin!4v1699999999999!5m2!1sen!2sin"
-                width="100%"
-                height="100%"
-                style={{ border: 0 }}
-                allowFullScreen
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                title="SKILLON Location"
-              ></iframe>
+            <div className="flex items-center gap-2">
+              <FaRocket className="text-rose-500 text-sm" />
+              <span>Fast Response</span>
             </div>
-            <p className="text-gray-500 text-sm mt-4 text-center flex items-center justify-center gap-1">
-              <FaMapMarkerAlt className="text-rose-500" />
-              Bangalore, Karnataka, India
-            </p>
-          </motion.div>
-        </div>
+            <div className="flex items-center gap-2">
+              <FaClock className="text-rose-500 text-sm" />
+              <span>24/7 Support</span>
+            </div>
+          </div>
+        </motion.div>
       </div>
     </section>
   );

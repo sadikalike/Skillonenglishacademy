@@ -5,7 +5,7 @@ import {
   FaChalkboardTeacher, FaUserGraduate, FaClock, FaBrain, 
   FaCode, FaComments, FaUsers, FaHeart, FaCheckCircle, 
   FaArrowRight, FaGraduationCap, FaLanguage, FaMicrophone,
-  FaChartLine, FaTrophy, FaRocket
+  FaChartLine, FaTrophy, FaRocket, FaInstagram, FaMapMarkerAlt
 } from "react-icons/fa";
 
 export default function About() {
@@ -79,6 +79,37 @@ export default function About() {
     { name: "Interview & Presentation Training", icon: <FaChartLine />, color: "from-indigo-500 to-purple-500" }
   ];
 
+  // States Data
+  const states = [
+    {
+      name: "Kerala",
+      language: "Malayalam",
+      flag: "🇮🇳",
+      color: "from-yellow-500 to-orange-500",
+      instagram: "https://www.instagram.com/skillonenglishacademy",
+      instagramHandle: "@skillonenglishacademy",
+      description: "മലയാളത്തിൽ ഇംഗ്ലീഷ് പഠിക്കൂ | Learn English in Malayalam"
+    },
+    {
+      name: "Karnataka",
+      language: "Kannada",
+      flag: "🇮🇳",
+      color: "from-red-500 to-rose-500",
+      instagram: "https://www.instagram.com/skillon_kannada",
+      instagramHandle: "@skillon_kannada",
+      description: "ಕನ್ನಡದಲ್ಲಿ ಇಂಗ್ಲೀಷ್ ಕಲಿಯಿರಿ | Learn English in Kannada"
+    },
+    {
+      name: "Tamil Nadu",
+      language: "Tamil",
+      flag: "🇮🇳",
+      color: "from-blue-500 to-indigo-500",
+      instagram: "https://www.instagram.com/skillon_tamil",
+      instagramHandle: "@skillon_tamil",
+      description: "தமிழில் ஆங்கிலம் கற்றுக்கொள்ளுங்கள் | Learn English in Tamil"
+    }
+  ];
+
   const fadeInUp = {
     hidden: { opacity: 0, y: 30 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
@@ -126,6 +157,70 @@ export default function About() {
               Whether you're a student, professional, or homemaker — we tailor your learning journey based on your goals.
             </p>
           </div>
+        </motion.div>
+
+        {/* States Section - Before Why Choose SKILLON */}
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          variants={fadeInUp}
+          className="mb-20"
+        >
+          <div className="text-center mb-12">
+            <div className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-50 to-indigo-50 px-4 py-2 rounded-full mb-4 border border-blue-200">
+              <FaMapMarkerAlt className="text-blue-500 text-sm" />
+              <span className="text-blue-600 text-sm font-medium">Our Presence</span>
+            </div>
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              We're <span className="bg-gradient-to-r from-rose-600 to-rose-500 bg-clip-text text-transparent">Pan India</span>
+            </h2>
+            <div className="w-20 h-1 bg-gradient-to-r from-rose-600 to-rose-400 mx-auto rounded-full"></div>
+            <p className="text-gray-500 mt-4">Learn English in your mother tongue across 3 states</p>
+          </div>
+          
+          <motion.div
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+            className="grid md:grid-cols-3 gap-6"
+          >
+            {states.map((state, index) => (
+              <motion.div
+                key={index}
+                variants={fadeInUp}
+                whileHover={{ y: -8, scale: 1.02 }}
+                className="group relative p-6 bg-white rounded-2xl border border-gray-200 hover:border-rose-300 hover:shadow-2xl transition-all duration-300 overflow-hidden"
+              >
+                <div className={`absolute top-0 right-0 w-32 h-32 bg-gradient-to-br ${state.color} opacity-5 rounded-full blur-2xl`}></div>
+                <div className="relative z-10">
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className={`w-14 h-14 bg-gradient-to-br ${state.color} rounded-xl flex items-center justify-center text-white text-2xl shadow-lg`}>
+                      {state.flag}
+                    </div>
+                    <div>
+                      <h3 className="text-2xl font-bold text-gray-900">{state.name}</h3>
+                      <p className="text-sm text-rose-600 font-medium">{state.language}</p>
+                    </div>
+                  </div>
+                  <p className="text-gray-500 text-sm leading-relaxed mb-4">
+                    {state.description}
+                  </p>
+                  <motion.a
+                    href={state.instagram}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    whileHover={{ scale: 1.05 }}
+                    className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-pink-500 to-rose-500 text-white rounded-full text-sm font-medium hover:shadow-lg transition-all duration-300"
+                  >
+                    <FaInstagram className="text-sm" />
+                    {state.instagramHandle}
+                  </motion.a>
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
         </motion.div>
 
         {/* Why Choose SKILLON Section */}
