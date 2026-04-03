@@ -1,0 +1,62 @@
+@import "tailwindcss";
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    background: linear-gradient(180deg, #A00000 0%, #8B0000 50%, #2B0000 100%);
+    color: #FFFFFF;
+    min-height: 100vh;
+  }
+}
+
+main {
+  padding-top: 76px;
+}
+
+/* Premium Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #2B0000;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #A00000;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #FF3333;
+}
+
+/* Selection Color */
+::selection {
+  background: #A00000;
+  color: #FFFFFF;
+}
+
+/* Smooth transitions for all elements */
+* {
+  transition: all 0.2s ease;
+}
+/* Gradient Animation */
+@keyframes gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: gradient 3s ease infinite;
+}
+
+/* Delay utilities */
+.delay-1000 {
+  animation-delay: 1000ms;
+}
