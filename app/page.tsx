@@ -1,9 +1,9 @@
 import Navbar from "./components/Navbar";
-import HomeComponent from "./components/home";
+import HomeComponent from "./components/Home";
 import About from "./components/About";
 import Courses from "./components/Courses";
 import Testimonials from "./components/testimonials";
-import Contact from "./components/contact";
+import Contact from "./components/Contact";
 
 export default function Home() {
   return (

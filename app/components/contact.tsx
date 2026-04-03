@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { motion } from "framer-motion";
 import { 
   FaMapMarkerAlt, 
   FaPhone, 
@@ -9,10 +10,12 @@ import {
   FaWhatsapp, 
   FaInstagram, 
   FaFacebookF, 
-  FaLinkedinIn, 
   FaYoutube,
   FaPaperPlane,
-  FaCheckCircle
+  FaCheckCircle,
+  FaHeadset,
+  FaShieldAlt,
+  FaRocket
 } from "react-icons/fa";
 
 export default function Contact() {
@@ -24,16 +27,13 @@ export default function Contact() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const formData = new FormData(e.currentTarget);
     
-    // Simulate form submission
     setFormStatus({
       submitted: true,
       message: "Thank you! We'll get back to you within 24 hours.",
       type: "success"
     });
     
-    // Reset form after 3 seconds
     setTimeout(() => {
       setFormStatus({ submitted: false, message: "", type: null });
       (e.target as HTMLFormElement).reset();
@@ -45,82 +45,124 @@ export default function Contact() {
       icon: <FaMapMarkerAlt className="text-2xl" />,
       title: "Visit Us",
       details: ["Bangalore, Karnataka", "India - 560001"],
-      color: "bg-rose-100 text-rose-600"
+      gradient: "from-rose-500 to-rose-600",
+      delay: 0.1
     },
     {
       icon: <FaPhone className="text-2xl" />,
       title: "Call Us",
-      details: ["+91 98765 43210", "+91 98765 43211"],
-      color: "bg-blue-100 text-blue-600"
+      details: ["+91 70251 91020", "+91 75104 36350"],
+      gradient: "from-rose-500 to-rose-600",
+      delay: 0.2
     },
     {
       icon: <FaEnvelope className="text-2xl" />,
       title: "Email Us",
       details: ["info@skillon.com", "support@skillon.com"],
-      color: "bg-emerald-100 text-emerald-600"
+      gradient: "from-rose-500 to-rose-600",
+      delay: 0.3
     },
     {
       icon: <FaClock className="text-2xl" />,
       title: "Working Hours",
-      details: ["Mon - Sat: 9:00 AM - 7:00 PM", "Sunday: Closed"],
-      color: "bg-purple-100 text-purple-600"
+      details: ["Mon - Sat: 9:00 AM - 11:00 PM", "Sunday: Closed"],
+      gradient: "from-rose-500 to-rose-600",
+      delay: 0.4
     }
   ];
 
   const socialLinks = [
-    { icon: <FaWhatsapp />, name: "WhatsApp", color: "bg-green-500", link: "https://wa.me/917510436350" },
-    { icon: <FaInstagram />, name: "Instagram", color: "bg-pink-500", link: "https://instagram.com" },
-    { icon: <FaFacebookF />, name: "Facebook", color: "bg-blue-600", link: "https://facebook.com" },
-    { icon: <FaLinkedinIn />, name: "LinkedIn", color: "bg-blue-700", link: "https://linkedin.com" },
-    { icon: <FaYoutube />, name: "YouTube", color: "bg-red-600", link: "https://youtube.com" }
+    { icon: <FaWhatsapp />, name: "WhatsApp 1", color: "from-green-500 to-green-600", link: "https://wa.me/917025191020", number: "70251 91020" },
+    { icon: <FaWhatsapp />, name: "WhatsApp 2", color: "from-green-500 to-green-600", link: "https://wa.me/917510436350", number: "75104 36350" },
+    { icon: <FaInstagram />, name: "Instagram", color: "from-pink-500 to-rose-500", link: "https://instagram.com" },
+    { icon: <FaFacebookF />, name: "Facebook", color: "from-blue-600 to-blue-700", link: "https://facebook.com" },
+    { icon: <FaYoutube />, name: "YouTube", color: "from-red-600 to-red-700", link: "https://youtube.com" }
   ];
 
+  const fadeInUp = {
+    hidden: { opacity: 0, y: 30 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
+  };
+
+  const staggerContainer = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.1 }
+    }
+  };
+
   return (
-    <section id="contact" className="py-24 bg-gray-50">
+    <section id="contact" className="py-24 bg-gradient-to-br from-gray-50 to-white overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 bg-rose-50 px-4 py-2 rounded-full mb-6">
+        {/* Header - Centered */}
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }}
+          variants={fadeInUp}
+          className="text-center max-w-3xl mx-auto mb-16"
+        >
+          <div className="inline-flex items-center gap-2 bg-gradient-to-r from-rose-50 to-rose-100 px-4 py-2 rounded-full mb-6 border border-rose-200">
             <span className="w-2 h-2 bg-rose-500 rounded-full animate-pulse"></span>
             <span className="text-rose-600 text-sm font-medium">Get in Touch</span>
           </div>
           <h1 className="text-4xl md:text-5xl font-bold mb-6">
-            Let's <span className="text-rose-600">Connect</span>
+            Let's <span className="bg-gradient-to-r from-rose-600 to-rose-500 bg-clip-text text-transparent">Connect</span>
           </h1>
           <p className="text-gray-600 text-lg">
             Have questions? We'd love to hear from you. Send us a message and we'll respond as soon as possible.
           </p>
-        </div>
+        </motion.div>
 
         {/* Contact Grid */}
         <div className="grid lg:grid-cols-2 gap-10 mb-16">
           
           {/* Contact Info Cards */}
-          <div>
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+            variants={staggerContainer}
+          >
             <div className="grid sm:grid-cols-2 gap-6">
               {contactInfo.map((info, index) => (
-                <div 
+                <motion.div
                   key={index}
-                  className="bg-white rounded-2xl p-6 shadow-md hover:shadow-lg transition-all duration-300 group"
+                  variants={fadeInUp}
+                  whileHover={{ y: -8, scale: 1.02 }}
+                  className="group relative bg-white rounded-2xl p-6 shadow-md hover:shadow-2xl transition-all duration-300 overflow-hidden"
                 >
-                  <div className={`w-14 h-14 ${info.color} rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}>
+                  <div className={`absolute top-0 right-0 w-32 h-32 bg-gradient-to-br ${info.gradient} opacity-5 rounded-full blur-2xl`}></div>
+                  <motion.div 
+                    whileHover={{ rotate: 360, scale: 1.1 }}
+                    transition={{ duration: 0.5 }}
+                    className={`w-14 h-14 bg-gradient-to-br ${info.gradient} rounded-xl flex items-center justify-center text-white mb-4 shadow-lg`}
+                  >
                     {info.icon}
-                  </div>
+                  </motion.div>
                   <h3 className="text-xl font-bold text-gray-900 mb-3">{info.title}</h3>
                   {info.details.map((detail, i) => (
                     <p key={i} className="text-gray-500 text-sm">{detail}</p>
                   ))}
-                </div>
+                </motion.div>
               ))}
             </div>
-          </div>
+          </motion.div>
 
           {/* Contact Form */}
-          <div className="bg-white rounded-2xl shadow-lg p-8">
-            <h2 className="text-2xl font-bold text-gray-900 mb-6">
-              Send us a <span className="text-rose-600">Message</span>
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+            variants={fadeInUp}
+            className="bg-white rounded-2xl shadow-xl p-8 border border-gray-100"
+          >
+            <h2 className="text-2xl font-bold text-gray-900 mb-2 text-center">
+              Send us a <span className="bg-gradient-to-r from-rose-600 to-rose-500 bg-clip-text text-transparent">Message</span>
             </h2>
+            <p className="text-gray-500 text-sm mb-6 text-center">Fill out the form and we'll get back to you shortly</p>
             
             <form onSubmit={handleSubmit} className="space-y-5">
               <div className="grid md:grid-cols-2 gap-5">
@@ -183,77 +225,128 @@ export default function Contact() {
                 ></textarea>
               </div>
               
-              <button 
+              <motion.button 
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
                 type="submit"
-                className="w-full flex items-center justify-center gap-2 px-6 py-3.5 bg-rose-600 text-white rounded-xl font-semibold hover:bg-rose-700 transition-all duration-300 hover:shadow-lg transform hover:-translate-y-0.5"
+                className="w-full flex items-center justify-center gap-2 px-6 py-3.5 bg-gradient-to-r from-rose-600 to-rose-500 text-white rounded-xl font-semibold hover:shadow-lg transition-all duration-300"
               >
                 <FaPaperPlane />
                 Send Message
-              </button>
+              </motion.button>
               
               {formStatus.submitted && formStatus.type === "success" && (
-                <div className="flex items-center gap-2 p-3 bg-green-50 text-green-600 rounded-lg">
+                <motion.div 
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="flex items-center gap-2 p-3 bg-green-50 text-green-600 rounded-lg"
+                >
                   <FaCheckCircle />
                   <span className="text-sm">{formStatus.message}</span>
-                </div>
+                </motion.div>
               )}
             </form>
-          </div>
+          </motion.div>
         </div>
 
         {/* Social Media & Map Section */}
         <div className="grid md:grid-cols-2 gap-10">
           
-          {/* Social Media Links */}
-          <div className="bg-white rounded-2xl p-8 shadow-md">
-            <h3 className="text-xl font-bold text-gray-900 mb-6">
-              Connect on <span className="text-rose-600">Social Media</span>
+          {/* Social Media Links - Centered */}
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+            variants={fadeInUp}
+            className="bg-white rounded-2xl p-8 shadow-xl border border-gray-100"
+          >
+            <h3 className="text-xl font-bold text-gray-900 mb-6 text-center">
+              Connect on <span className="bg-gradient-to-r from-rose-600 to-rose-500 bg-clip-text text-transparent">Social Media</span>
             </h3>
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
               {socialLinks.map((social, index) => (
-                <a
+                <motion.a
                   key={index}
                   href={social.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-3 px-4 py-3 bg-gray-50 rounded-xl hover:shadow-md transition-all duration-300 group"
+                  whileHover={{ scale: 1.05, y: -3 }}
+                  className="flex flex-col items-center gap-2 px-4 py-3 bg-gray-50 rounded-xl hover:shadow-md transition-all duration-300 group text-center"
                 >
-                  <div className={`w-8 h-8 ${social.color} rounded-lg flex items-center justify-center text-white text-sm`}>
+                  <div className={`w-10 h-10 bg-gradient-to-r ${social.color} rounded-full flex items-center justify-center text-white text-lg`}>
                     {social.icon}
                   </div>
-                  <span className="text-gray-700 text-sm font-medium group-hover:text-rose-600 transition">
+                  <span className="text-gray-700 text-xs font-medium group-hover:text-rose-600 transition">
                     {social.name}
                   </span>
-                </a>
+                  {social.number && (
+                    <span className="text-gray-400 text-[10px]">{social.number}</span>
+                  )}
+                </motion.a>
               ))}
             </div>
             
-            {/* WhatsApp CTA */}
-            <div className="mt-6 p-4 bg-green-50 rounded-xl border border-green-100">
-              <div className="flex items-center gap-3">
-                <FaWhatsapp className="text-3xl text-green-500" />
-                <div>
-                  <p className="text-gray-700 font-medium">Quick Support on WhatsApp</p>
-                  <p className="text-sm text-gray-500">Click to chat with our team</p>
+            {/* WhatsApp CTA - Two Numbers */}
+            <div className="mt-6 space-y-3">
+              <div className="p-4 bg-gradient-to-r from-green-50 to-emerald-50 rounded-xl border border-green-100">
+                <div className="flex items-center gap-3">
+                  <div className="w-12 h-12 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full flex items-center justify-center">
+                    <FaHeadset className="text-white text-xl" />
+                  </div>
+                  <div>
+                    <p className="text-gray-700 font-medium">Quick Support on WhatsApp</p>
+                    <p className="text-sm text-gray-500">Click to chat with our team</p>
+                  </div>
                 </div>
-                <a 
-                  href="https://wa.me/917510436350"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="ml-auto px-4 py-2 bg-green-500 text-white rounded-lg text-sm font-medium hover:bg-green-600 transition"
-                >
-                  Chat Now
-                </a>
+                <div className="flex gap-3 mt-3">
+                  <motion.a 
+                    href="https://wa.me/917025191020"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    whileHover={{ scale: 1.05 }}
+                    className="flex-1 px-3 py-2 bg-gradient-to-r from-green-500 to-emerald-500 text-white rounded-lg text-sm font-medium hover:shadow-lg transition text-center"
+                  >
+                    📱 70251 91020
+                  </motion.a>
+                  <motion.a 
+                    href="https://wa.me/917510436350"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    whileHover={{ scale: 1.05 }}
+                    className="flex-1 px-3 py-2 bg-gradient-to-r from-green-500 to-emerald-500 text-white rounded-lg text-sm font-medium hover:shadow-lg transition text-center"
+                  >
+                    📱 75104 36350
+                  </motion.a>
+                </div>
               </div>
             </div>
-          </div>
+
+            {/* Trust Badges */}
+            <div className="mt-6 flex items-center justify-center gap-4 text-xs text-gray-500">
+              <div className="flex items-center gap-1">
+                <FaShieldAlt className="text-rose-500" />
+                <span>100% Secure</span>
+              </div>
+              <div className="flex items-center gap-1">
+                <FaRocket className="text-rose-500" />
+                <span>Fast Response</span>
+              </div>
+            </div>
+          </motion.div>
 
           {/* Map / Location */}
-          <div className="bg-white rounded-2xl p-8 shadow-md">
-            <h3 className="text-xl font-bold text-gray-900 mb-6">
-              Find <span className="text-rose-600">Us</span>
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+            variants={fadeInUp}
+            className="bg-white rounded-2xl p-8 shadow-xl border border-gray-100"
+          >
+            <h3 className="text-xl font-bold text-gray-900 mb-6 text-center">
+              Find <span className="bg-gradient-to-r from-rose-600 to-rose-500 bg-clip-text text-transparent">Us</span>
             </h3>
-            <div className="bg-gray-100 rounded-xl overflow-hidden h-64">
+            <div className="bg-gray-100 rounded-xl overflow-hidden h-64 relative">
+              <div className="absolute inset-0 bg-gradient-to-br from-rose-500/10 to-transparent pointer-events-none"></div>
               <iframe 
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3888.514887675688!2d77.5945630747778!3d12.971999687307676!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae1670c9b44e6d%3A0xf8dfc3e1417e2a0!2sBengaluru%2C%20Karnataka!5e0!3m2!1sen!2sin!4v1699999999999!5m2!1sen!2sin"
                 width="100%"
@@ -265,10 +358,11 @@ export default function Contact() {
                 title="SKILLON Location"
               ></iframe>
             </div>
-            <p className="text-gray-500 text-sm mt-4 text-center">
-              📍 Bangalore, Karnataka, India
+            <p className="text-gray-500 text-sm mt-4 text-center flex items-center justify-center gap-1">
+              <FaMapMarkerAlt className="text-rose-500" />
+              Bangalore, Karnataka, India
             </p>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

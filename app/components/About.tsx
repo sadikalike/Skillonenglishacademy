@@ -18,7 +18,7 @@ export default function About() {
     },
     {
       icon: <FaCode className="text-3xl" />,
-      title: "25 Learning Codes",
+      title: "25 Codes",
       description: "A unique system designed for easy understanding",
       gradient: "from-purple-500 to-pink-500"
     },
@@ -51,19 +51,19 @@ export default function About() {
   const courses = [
     {
       title: "Online Courses",
-      description: "Online courses provide flexible, affordable learning, letting you study anytime, anywhere, and gain expert knowledge on your terms.",
+      description: "Online courses offer flexible and affordable learning, allowing you to study anytime, anywhere, and gain expert knowledge at your own pace.",
       icon: <FaChalkboardTeacher className="text-4xl" />,
       gradient: "from-blue-500 to-cyan-500"
     },
     {
-      title: "Learn with Expert",
+      title: "Learn with Experts",
       description: "Learn from industry experts, gaining practical knowledge, insights, and guidance to help you succeed and grow in your field.",
       icon: <FaUsers className="text-4xl" />,
       gradient: "from-purple-500 to-pink-500"
     },
     {
       title: "Personal Tutor",
-      description: "Our English course provides a Personal Tutor to assist with homework submissions, clear doubts, and offer ongoing support to enhance your learning experience.",
+      description: "Our English course provides a personal tutor to help with homework, clear your doubts, and offer continuous support to enhance your learning experience.",
       icon: <FaUserGraduate className="text-4xl" />,
       gradient: "from-orange-500 to-red-500"
     }

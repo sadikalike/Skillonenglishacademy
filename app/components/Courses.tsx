@@ -7,7 +7,7 @@ export default function Courses() {
     {
       level: "Basic Level",
       icon: <FaGraduationCap className="text-4xl" />,
-      description: "Designed for absolute beginners. You'll learn how to form correct sentences, introduce yourself, ask and answer simple questions, and use everyday vocabulary confidently. We'll focus on basic grammar, pronunciation, and removing hesitation through regular speaking practice and personalized support",
+      description: "Designed for absolute beginners, this program helps learners form correct sentences, introduce themselves, ask and answer simple questions, and use everyday vocabulary with confidence. It focuses on basic grammar, pronunciation, and reducing hesitation through regular speaking practice and personalised support.",
       color: "from-emerald-500 to-teal-600",
       bgColor: "bg-emerald-50",
       btnColor: "hover:bg-emerald-600"
@@ -15,7 +15,7 @@ export default function Courses() {
     {
       level: "Intermediate Level",
       icon: <FaUserTie className="text-4xl" />,
-      description: "This level helps you speak more fluently and naturally in real-life situations. Learn to describe, explain, and express ideas with clarity. Improve your grammar, vocabulary, and listening skills while building confidence through conversations, role-plays, and structured speaking activities.",
+      description: "This level helps you speak more fluently and naturally in real-life situations. Learn to describe, explain, and express ideas clearly while improving your grammar, vocabulary, and listening skills. Build confidence through conversations, role-plays, and structured speaking activities.",
       color: "from-blue-500 to-indigo-600",
       bgColor: "bg-blue-50",
       btnColor: "hover:bg-blue-600"
@@ -23,7 +23,7 @@ export default function Courses() {
     {
       level: "Advanced Level",
       icon: <FaRocket className="text-4xl" />,
-      description: "Ideal for professionals and advanced learners. Focus on public speaking, group discussions, presentations, and business communication. You'll master advanced grammar, persuasive speech, and fluency techniques to communicate with power and impact in personal or professional settings.",
+      description: "Ideal for professionals and advanced learners, this program focuses on public speaking, group discussions, presentations, and business communication. Master advanced grammar, persuasive speaking, and fluency techniques to communicate with clarity and impact in both personal and professional settings.",
       color: "from-purple-500 to-pink-600",
       bgColor: "bg-purple-50",
       btnColor: "hover:bg-purple-600"
@@ -31,7 +31,7 @@ export default function Courses() {
     {
       level: "Crash Course",
       icon: <FaBolt className="text-4xl" />,
-      description: "A short-term intensive program for job seekers, interview preparation, or urgent fluency needs. Get focused training on grammar correction, vocabulary building, and real-time speaking improvement in a condensed time frame.",
+      description: "A short-term intensive program designed for job seekers, interview preparation, and urgent fluency needs. It provides focused training in grammar, vocabulary development, and real-time speaking improvement within a condensed time frame.",
       color: "from-orange-500 to-red-600",
       bgColor: "bg-orange-50",
       btnColor: "hover:bg-orange-600"
@@ -105,9 +105,11 @@ export default function Courses() {
                   </div>
                 </div>
                 
-                {/* Enquiry Button */}
+                {/* Enquiry Button - WhatsApp Link Updated */}
                 <a 
-                  href="#contact"
+                  href="https://wa.me/917025191020"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className={`inline-flex items-center gap-2 px-6 py-3 bg-gray-900 text-white rounded-xl font-semibold ${course.btnColor} transition-all duration-300 hover:shadow-lg group`}
                 >
                   ENQUIRY NOW
@@ -138,7 +140,7 @@ export default function Courses() {
                 Book Free Demo
               </a>
               <a 
-                href="https://wa.me/917510436350"
+                href="https://wa.me/917025191020"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-8 py-3.5 bg-green-600 text-white rounded-full font-semibold hover:bg-green-700 hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-300"
