@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { FaRupeeSign, FaGooglePay, FaMobileAlt, FaPaypal, FaShieldAlt, FaArrowRight, FaWhatsapp, FaSms } from "react-icons/fa";
+import { FaRupeeSign, FaGooglePay, FaMobileAlt, FaPaypal, FaShieldAlt, FaArrowRight, FaWhatsapp } from "react-icons/fa";
 
 declare global {
   interface Window {
@@ -36,39 +36,6 @@ export default function PaymentPage() {
     });
   };
 
-  // Function to send SMS via API (You need to implement this with your SMS provider)
-  const sendSMS = async (phone: string, name: string, amount: string, paymentId: string) => {
-    // Option 1: Using WhatsApp API (already implemented)
-    // Option 2: Using SMS Gateway API (Unifonic, Twilio, MSG91, etc.)
-    
-    // For now, we'll use WhatsApp which acts as SMS alternative
-    // To add real SMS, you'll need an SMS gateway API key
-    
-    console.log(`SMS would be sent to ${phone}: Payment successful for ₹${amount}`);
-    
-    // Example with MSG91 (You need to sign up and get API key)
-    /*
-    try {
-      await fetch('https://api.msg91.com/api/v5/flow/', {
-        method: 'POST',
-        headers: {
-          'authkey': 'YOUR_MSG91_AUTH_KEY',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          template_id: 'YOUR_TEMPLATE_ID',
-          mobiles: phone,
-          name: name,
-          amount: amount,
-          payment_id: paymentId
-        })
-      });
-    } catch (error) {
-      console.error('SMS sending failed:', error);
-    }
-    */
-  };
-
   const handlePayment = async () => {
     // Validation
     if (!formData.name || !formData.email || !formData.phone || !formData.amount) {
@@ -98,6 +65,7 @@ export default function PaymentPage() {
         return;
       }
 
+      // Razorpay Options with UPI Intent - Direct GPay
       const options = {
         key: "rzp_live_Sa9lcLsWxiV7GE",
         amount: amountNum * 100,
@@ -120,6 +88,7 @@ export default function PaymentPage() {
         theme: {
           color: "#e11d48"
         },
+        // This enables UPI Intent - Directly opens GPay/PhonePe app
         modal: {
           ondismiss: function() {
             setLoading(false);
@@ -129,41 +98,19 @@ export default function PaymentPage() {
 
       const razorpay = new window.Razorpay(options);
       
-      razorpay.on("payment.success", async function(response: any) {
-        const paymentId = response.razorpay_payment_id;
-        
-        // 1. WhatsApp Message (Primary)
-        const whatsappMessage = `✅ *PAYMENT SUCCESSFUL!* ✅%0A%0A` +
+      razorpay.on("payment.success", function(response: any) {
+        const message = `✅ *PAYMENT SUCCESSFUL!* ✅%0A%0A` +
           `━━━━━━━━━━━━━━━━━━━━━%0A` +
           `👤 *Name:* ${formData.name}%0A` +
           `📱 *Phone:* ${formData.phone}%0A` +
           `📧 *Email:* ${formData.email}%0A` +
           `💰 *Amount:* ₹${formData.amount}%0A` +
-          `🆔 *Payment ID:* ${paymentId}%0A` +
+          `🆔 *Payment ID:* ${response.razorpay_payment_id}%0A` +
           `━━━━━━━━━━━━━━━━━━━━━%0A%0A` +
-          `Thank you for choosing SKILLON English Academy! 🙏%0A%0A` +
-          `Our team will contact you shortly.`;
+          `Thank you for choosing SKILLON! 🙏`;
         
-        window.open(`https://wa.me/917510436350?text=${whatsappMessage}`, "_blank");
-        
-        // 2. SMS Confirmation (For customer trust)
-        const smsMessage = `SKILLON: Payment of ₹${formData.amount} received successfully. Payment ID: ${paymentId}. Thank you for choosing SKILLON English Academy! - Team SKILLON`;
-        
-        // Send SMS using your preferred SMS gateway
-        // For demo, we'll show an alert that SMS would be sent
-        // In production, integrate with MSG91, Twilio, or any SMS provider
-        
-        // Show SMS confirmation dialog
-        const sendSmsConfirm = confirm(`Send SMS confirmation to ${formData.phone}?\n\nMessage: ${smsMessage}`);
-        if (sendSmsConfirm) {
-          // Here you would call your SMS API
-          alert(`SMS sent to ${formData.phone}\n\nMessage: ${smsMessage}`);
-        }
-        
-        // 3. Browser Alert
-        alert(`✅ Payment Successful!\n\nPayment ID: ${paymentId}\nAmount: ₹${formData.amount}\n\nA confirmation message has been sent to your WhatsApp and SMS.`);
-        
-        // Reset form
+        window.open(`https://wa.me/917510436350?text=${message}`, "_blank");
+        alert(`✅ Payment Successful! Payment ID: ${response.razorpay_payment_id}`);
         setFormData({ name: "", email: "", phone: "", amount: "" });
         setLoading(false);
       });
@@ -210,22 +157,6 @@ export default function PaymentPage() {
           </p>
         </motion.div>
 
-        {/* Trust Badges */}
-        <div className="flex justify-center gap-4 mb-6">
-          <div className="flex items-center gap-1 text-xs text-gray-500">
-            <FaWhatsapp className="text-green-500" />
-            <span>WhatsApp Confirmation</span>
-          </div>
-          <div className="flex items-center gap-1 text-xs text-gray-500">
-            <FaSms className="text-blue-500" />
-            <span>SMS Confirmation</span>
-          </div>
-          <div className="flex items-center gap-1 text-xs text-gray-500">
-            <FaShieldAlt className="text-green-500" />
-            <span>100% Secure</span>
-          </div>
-        </div>
-
         {/* Payment Card */}
         <motion.div
           initial="hidden"
@@ -241,7 +172,7 @@ export default function PaymentPage() {
                 💡 Click "Pay Now" → Select GPay → Complete payment in app
               </p>
               <p className="text-blue-600 text-xs mt-1">
-                You'll receive confirmation on WhatsApp & SMS
+                Direct UPI payment - No OTP/SMS delay
               </p>
             </div>
 
@@ -272,7 +203,7 @@ export default function PaymentPage() {
               </div>
 
               <div>
-                <label className="block text-gray-700 text-sm font-medium mb-1">Mobile Number *</label>
+                <label className="block text-gray-700 text-sm font-medium mb-1">Mobile Number (for UPI) *</label>
                 <div className="relative">
                   <span className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400">+91</span>
                   <input 
@@ -285,7 +216,7 @@ export default function PaymentPage() {
                     className="w-full pl-12 pr-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:border-rose-500 focus:ring-2 focus:ring-rose-100 transition text-gray-900"
                   />
                 </div>
-                <p className="text-xs text-gray-400 mt-1">You'll receive confirmation on this number</p>
+                <p className="text-xs text-gray-400 mt-1">Enter mobile number linked to GPay/PhonePe</p>
               </div>
 
               <div>
@@ -343,26 +274,16 @@ export default function PaymentPage() {
               ) : (
                 <>
                   <FaGooglePay className="text-xl" />
-                  Pay Now (GPay/PhonePe)
+                  Pay with UPI (GPay/PhonePe)
                   <FaArrowRight />
                 </>
               )}
             </button>
 
-            {/* Secure & Trust Badges */}
-            <div className="mt-4 flex flex-wrap items-center justify-center gap-4 text-xs text-gray-400">
-              <div className="flex items-center gap-1">
-                <FaShieldAlt className="text-green-500" />
-                <span>Razorpay Secure</span>
-              </div>
-              <div className="flex items-center gap-1">
-                <FaWhatsapp className="text-green-500" />
-                <span>WhatsApp Confirmation</span>
-              </div>
-              <div className="flex items-center gap-1">
-                <FaSms className="text-blue-500" />
-                <span>SMS Confirmation</span>
-              </div>
+            {/* Secure Badge */}
+            <div className="mt-4 flex items-center justify-center gap-2 text-xs text-gray-400">
+              <FaShieldAlt className="text-green-500" />
+              <span>100% Secure Payment by Razorpay</span>
             </div>
           </div>
         </motion.div>
